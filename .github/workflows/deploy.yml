@@ -2,35 +2,35 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]  # 当推送到 main 分支时触发
+    branches: [ main ]
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest  # 在 Ubuntu 系统上运行
+    runs-on: ubuntu-latest
     
     steps:
-    # 1. 获取代码
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # 2. 设置 Node.js 环境
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '18'  # 使用 Node.js 18
-        cache: 'npm'        # 缓存 npm 依赖，加速构建
+        node-version: '20'  # 改为 20.x
+        cache: 'npm'
 
-    # 3. 安装依赖
     - name: Install dependencies
       run: npm install
 
-    # 4. 构建项目（生成 dist 文件夹）
     - name: Build project
       run: npm run build
 
-    # 5. 部署到 GitHub Pages
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+    - name: Setup Pages
+      uses: actions/configure-pages@v2
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v1
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist  # 部署 dist 文件夹的内容
+        path: ./dist
+
+    - name: Deploy to GitHub Pages
+      uses: actions/deploy-pages@v1
