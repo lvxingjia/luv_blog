@@ -8,7 +8,7 @@
     :style="{ height: currentHeight + 'px' }"
   >
     <!-- 背景图始终渲染 -->
-    <div class="hero-bg" :style="{ backgroundImage: `url(${heroBg})` }"></div>
+    <div class="hero-bg" style="background-image: url('/images/header_bg.jpg')"></div>
 
     <!-- 遮罩层：根据状态调整透明度 -->
     <div class="hero-overlay" :class="{ 'hero-overlay--shrunk': !showHero && props.isHero }"></div>
