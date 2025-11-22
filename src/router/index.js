@@ -1,4 +1,3 @@
-// src/router/index.js
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 // 我们先把默认的 Home 页面当作我们的首页
@@ -9,12 +8,13 @@ import ArticleDetail from '@/views/ArticleDetail.vue'
 import Pic_share from '@/views/Picshare.vue'
 import Anime from '@/views/Anime.vue'
 import MessageBoard from '@/views/MessageBoard.vue'
+
 // 定义路由规则数组
 const routes = [
   // 当访问 '/' 根路径时，加载 Home 组件
   { path: '/', name: 'Home', component: Home },
   { path: '/about', name: 'About', component: About },
-  { path: '/archive', name: 'Archive', component: Archive }, // 可加 name 方便跳转
+  { path: '/archive', name: 'Archive', component: Archive },
   { path: '/post/:slug', name: 'ArticleDetail', component: ArticleDetail, props: true },
   { path: '/pic_share', name: 'Pic_share', component: Pic_share },
   { path: '/anime', name: 'Anime', component: Anime },
@@ -23,8 +23,8 @@ const routes = [
 
 // 创建路由器实例
 const router = createRouter({
-  // 使用 HTML5 History 模式（好看一点的地址）
-  history: createWebHashHistory(), // 改为 Hash 模式
+  // 使用 Hash 模式并指定基础路径
+  history: createWebHashHistory('/luv_blog/'),
   routes, // 把上面定义的 routes 数组传进来
 })
 
