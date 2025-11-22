@@ -6,7 +6,6 @@
       :is-hero="isHomePage"
       :hero-title="blogTitle"
       :hero-subtitle="blogSubtitle"
-      :hero-bg="'/images/header_bg.jpg'"
     />
 
     <div class="main-container">
