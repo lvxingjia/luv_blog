@@ -6,7 +6,7 @@
       :is-hero="isHomePage"
       :hero-title="blogTitle"
       :hero-subtitle="blogSubtitle"
-      hero-bg="/images/header_bg.jpg"
+      :hero-bg="/images/header_bg.jpg"
     />
 
     <div class="main-container">
@@ -20,7 +20,7 @@
       </main>
 
       <!-- 右侧个人信息 -->
-      <ProfileSidebar :profile="profile" :tags="tags" :avatar-url="avatarUrl" />
+      <ProfileSidebar :profile="profile" :tags="tags" />
     </div>
 
     <!-- 页脚 -->
@@ -97,9 +97,6 @@ export default {
 
       // 标签
       tags: ['生活', '代码', '宅宅', '读书', '美食', '动漫', '游戏', '漫画', '小说', '旮罗game'],
-
-      // 头像URL - 您可以替换成自己的图片
-      avatarUrl: '/images/head.png', // 留空显示默认头像
     }
   },
   methods: {

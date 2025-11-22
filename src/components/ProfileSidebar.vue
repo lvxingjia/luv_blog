@@ -4,10 +4,7 @@
     <!-- 个人资料卡片 -->
     <div class="profile-card">
       <div class="avatar-container">
-        <img :src="avatarUrl" alt="头像" class="avatar" v-if="avatarUrl" />
-        <div class="avatar-placeholder" v-else>
-          <i class="fas fa-user"></i>
-        </div>
+        <img src="/images/head.png" alt="头像" class="avatar" />
       </div>
       <h2 class="profile-name">{{ profile.name }}</h2>
       <p class="profile-bio">{{ profile.bio }}</p>
