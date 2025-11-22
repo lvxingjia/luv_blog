@@ -1,5 +1,5 @@
 // src/router/index.js
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 // 我们先把默认的 Home 页面当作我们的首页
 import Home from '../views/Home.vue'
@@ -24,7 +24,7 @@ const routes = [
 // 创建路由器实例
 const router = createRouter({
   // 使用 HTML5 History 模式（好看一点的地址）
-  history: createWebHistory(),
+  history: createWebHashHistory(), // 改为 Hash 模式
   routes, // 把上面定义的 routes 数组传进来
 })
 
