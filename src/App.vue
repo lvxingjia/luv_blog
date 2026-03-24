@@ -67,9 +67,9 @@ export default {
 
       // 最新动态
       recentUpdates: [
-        { id: 1, date: '25-11-21', text: '开发了这个网站' },
-        { id: 2, date: '25-10-27', text: '玩了甜蜜女友3' },
-        { id: 3, date: '23-01-10', text: '编不出来了' },
+        { id: 1, date: '26-03-24', text: '上传了第一篇正经blog' },
+        { id: 2, date: '25-11-21', text: '开发了这个网站' },
+        { id: 3, date: '25-10-27', text: '玩了甜蜜女友3' },
       ],
 
       // 文章列表
