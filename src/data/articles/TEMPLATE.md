@@ -3,24 +3,27 @@
 ## 快速开始
 
 ### 步骤 1: 创建新文件
+
 在 `src/data/articles/` 目录下创建新文件，命名格式: `NNN-slug-name.js`
+
 - NNN: 三位数字，递增（如 006, 007, 008...）
 - slug-name: 文章的英文 slug（用于 URL）
 
 ### 步骤 2: 复制模板
+
 ```javascript
 /**
  * 文章: 你的文章标题
  * 说明: 简短的文章描述
  */
 export default {
-  id: 6,                              // 递增的数字 ID
+  id: 6, // 递增的数字 ID
   title: '你的文章标题',
   excerpt: '简短摘要，显示在列表中...',
-  date: '2025-03-23',                // YYYY-MM-DD 格式
-  category: '生活随笔',              // 分类名称
-  readTime: '5分钟阅读',              // 阅读时间
-  slug: 'article-slug',              // URL slug（不能重复）
+  date: '2025-03-23', // YYYY-MM-DD 格式
+  category: '生活随笔', // 分类名称
+  readTime: '5分钟阅读', // 阅读时间
+  slug: 'article-slug', // URL slug（不能重复）
   content: `# 文章标题
 
 ## 第一段落
@@ -32,17 +35,20 @@ export default {
 ```
 
 ### 步骤 3: 修改 articles.js
+
 在 `src/data/articles.js` 中：
 
 1. **添加导入**：
+
 ```javascript
 import article006 from './articles/006-your-article-slug.js'
 ```
 
 2. **添加到数组**：
+
 ```javascript
 export const articles = [
-  article006,  // ← 新增
+  article006, // ← 新增
   article003,
   article001,
   // ...其他文章
@@ -50,6 +56,7 @@ export const articles = [
 ```
 
 ### 步骤 4: 完成
+
 刷新网页，新文章会自动出现在列表中并按日期排序！
 
 ---
@@ -57,6 +64,7 @@ export const articles = [
 ## 示例
 
 ### 创建文件: `006-typescript-tips.js`
+
 ```javascript
 /**
  * 文章: TypeScript 实用技巧
@@ -93,16 +101,17 @@ type UserWithoutAge = Omit<User, 'age'>
 ```
 
 ### 修改 articles.js
+
 ```javascript
 import article001 from './articles/001-winter-warmth.js'
 import article002 from './articles/002-kyoto-walk.js'
 import article003 from './articles/003-reading-to-live.js'
 import article004 from './articles/004-night-photography-tips.js'
 import article005 from './articles/005-yuan-lai-ni-ye-wan.js'
-import article006 from './articles/006-typescript-tips.js'  // ← 新增
+import article006 from './articles/006-typescript-tips.js' // ← 新增
 
 export const articles = [
-  article006,  // ← 新增
+  article006, // ← 新增
   article003,
   article001,
   article002,
@@ -146,7 +155,8 @@ src/data/
 A: 可以！直接编辑对应的 `NNN-slug.js` 文件即可，无需修改 articles.js
 
 **Q: 如何删除文章？**  
-A: 
+A:
+
 1. 删除对应的文件（如 `005-yuan-lai-ni-ye-wan.js`）
 2. 在 articles.js 中删除对应的 import 和数组项
 
