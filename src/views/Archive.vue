@@ -4,10 +4,11 @@
   <div class="archive-page">
     <h2>文章归档</h2>
 
-    <div v-for="(yearGroup, year) in groupedArticles" :key="year" class="year-section">
+    <!-- 遍历排序后的年份数组 -->
+    <div v-for="year in sortedYears" :key="year" class="year-section">
       <h3>{{ year }} 年</h3>
       <ul class="article-list">
-        <li v-for="article in yearGroup" :key="article.id" class="article-item">
+        <li v-for="article in groupedArticles[year]" :key="article.id" class="article-item">
           <router-link :to="`/post/${article.slug}`" class="article-title">
             {{ article.title }}
           </router-link>
@@ -27,17 +28,30 @@ export default {
   name: 'Archive',
   data() {
     return {
-      articles: articles.sort((a, b) => new Date(b.date) - new Date(a.date)), // 按时间正序
+      articles: articles.sort((a, b) => new Date(b.date) - new Date(a.date)), // 按时间倒序（最新在前）
     }
   },
   computed: {
     groupedArticles() {
-      return this.articles.reduce((acc, article) => {
+      // 按年份分组
+      const groups = this.articles.reduce((acc, article) => {
         const year = article.date.split('-')[0]
         if (!acc[year]) acc[year] = []
         acc[year].push(article)
         return acc
       }, {})
+
+      // 对每年的文章按日期倒序排序（同一年内最新在前）
+      Object.keys(groups).forEach((year) => {
+        groups[year].sort((a, b) => new Date(b.date) - new Date(a.date))
+      })
+
+      return groups
+    },
+
+    // 年份倒序（最新年份在前）
+    sortedYears() {
+      return Object.keys(this.groupedArticles).sort((a, b) => b - a)
     },
   },
 }
