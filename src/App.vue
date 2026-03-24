@@ -35,6 +35,7 @@
 import Sidebar from './components/Sidebar.vue'
 import ProfileSidebar from './components/ProfileSidebar.vue'
 import HeroHeader from './components/HeroHeader.vue'
+import { articles } from '../data/articles'
 export default {
   name: 'App',
   components: {
@@ -79,7 +80,7 @@ export default {
         name: 'Luv',
         bio: 'WEB即将迎来二次元的大变喵',
         stats: {
-          articles: 11,
+          articles: articles.length,
           categories: 45,
           words: '1.4万',
         },
