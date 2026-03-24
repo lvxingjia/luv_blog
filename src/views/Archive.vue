@@ -27,7 +27,7 @@ export default {
   name: 'Archive',
   data() {
     return {
-      articles: articles.sort((b, a) => new Date(b.date) - new Date(a.date)), // 按时间倒序
+      articles: articles.sort((a, b) => new Date(b.date) - new Date(a.date)), // 按时间正序
     }
   },
   computed: {
