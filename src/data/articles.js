@@ -9,7 +9,7 @@ import article003 from './articles/003-reading-to-live.js'
 import article004 from './articles/004-night-photography-tips.js'
 import article005 from './articles/005-yuan-lai-ni-ye-wan.js'
 import article006 from './articles/006-web-deploy.js'
-import article007 from './articles/007-vite-vs-webpack.js'
+import article007 from './articles/007-rag-deveop.js'
 
 // 按发布日期倒序排列（最新的在前）
 export const articles = [
