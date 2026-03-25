@@ -17,7 +17,7 @@ export default async (req, res) => {
     // ⚠️ 请替换下面的 GitHub URL 中的 "你的用户名" 和 "你的仓库"
     const GITHUB_REPO_URL =
       process.env.GITHUB_REPO_URL ||
-      'https://raw.githubusercontent.com/你的用户名/你的仓库/main/src/data/articles.js'
+      'https://raw.githubusercontent.com/lvxingjia/luv_blog/main/src/data/articles.js'
 
     console.log('[articles] 正在从 GitHub 获取文章列表...')
     const response = await fetch(GITHUB_REPO_URL)
