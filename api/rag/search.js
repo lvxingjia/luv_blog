@@ -40,9 +40,7 @@ export default async (req, res) => {
   const { query, topK = 5 } = req.body
 
   if (!query) {
-    res.write(
-      `data: ${JSON.stringify({ error: '需要提供 query 参数' })}\n\n`
-    )
+    res.write(`data: ${JSON.stringify({ error: '需要提供 query 参数' })}\n\n`)
     return res.end()
   }
 
@@ -65,13 +63,11 @@ export default async (req, res) => {
           'Content-Type': 'application/json',
         },
         timeout: 30000,
-      }
+      },
     )
 
     if (embeddingResponse.data.code !== '200') {
-      throw new Error(
-        `DashScope Embedding 错误: ${embeddingResponse.data.message}`
-      )
+      throw new Error(`DashScope Embedding 错误: ${embeddingResponse.data.message}`)
     }
 
     const queryVector = embeddingResponse.data.output.embeddings[0].embedding
@@ -80,9 +76,7 @@ export default async (req, res) => {
     // 2. 在 Pinecone 中搜索
     console.log(`[search] 正在 Pinecone 中搜索 (top-${topK})...`)
     const pineconeClient = getPinecone()
-    const index = pineconeClient.index(
-      process.env.PINECONE_INDEX_NAME || 'luv-blog'
-    )
+    const index = pineconeClient.index(process.env.PINECONE_INDEX_NAME || 'luv-blog')
     const searchResults = await index.query({
       vector: queryVector,
       topK: topK,
@@ -93,8 +87,7 @@ export default async (req, res) => {
 
     // 3. 构建上下文
     const contextParts = searchResults.matches.map(
-      (m, idx) =>
-        `【文章 ${idx + 1}: ${m.metadata.article_title}】\n${m.metadata.text}\n---`
+      (m, idx) => `【文章 ${idx + 1}: ${m.metadata.article_title}】\n${m.metadata.text}\n---`,
     )
     const context = contextParts.join('\n\n')
 
@@ -137,7 +130,7 @@ ${query}`,
         },
         responseType: 'stream',
         timeout: 60000,
-      }
+      },
     )
 
     // 5. 处理流式响应
@@ -155,9 +148,7 @@ ${query}`,
             if (json.output && json.output.choices) {
               const content = json.output.choices[0]?.message?.content || ''
               if (content) {
-                res.write(
-                  `data: ${JSON.stringify({ content, type: 'text' })}\n\n`
-                )
+                res.write(`data: ${JSON.stringify({ content, type: 'text' })}\n\n`)
               }
             }
 
@@ -184,9 +175,7 @@ ${query}`,
 
     chatResponse.data.on('error', (error) => {
       console.error('[search] 流错误:', error.message)
-      res.write(
-        `data: ${JSON.stringify({ error: '流处理错误: ' + error.message })}\n\n`
-      )
+      res.write(`data: ${JSON.stringify({ error: '流处理错误: ' + error.message })}\n\n`)
       res.end()
     })
   } catch (error) {
@@ -196,9 +185,8 @@ ${query}`,
     }
     res.write(
       `data: ${JSON.stringify({
-        error:
-          error.response?.data?.message || error.message || '查询失败',
-      })}\n\n`
+        error: error.response?.data?.message || error.message || '查询失败',
+      })}\n\n`,
     )
     res.write(`data: ${JSON.stringify({ done: true })}\n\n`)
     res.end()

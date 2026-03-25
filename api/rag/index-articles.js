@@ -1,7 +1,7 @@
 /**
  * API: 向量化文章索引接口 (Vercel 云函数)
  * 获取所有文章 → 文本分块 → 用 DashScope 生成向量 → 存储到 Pinecone
- * 
+ *
  * 调用方式:
  * POST /api/rag/index-articles
  * Header: Authorization: Bearer {CRON_SECRET}
@@ -57,9 +57,7 @@ export default async (req, res) => {
 
     // 1. 获取所有文章
     console.log('[index] 步骤 1/4: 获取所有文章...')
-    const articlesResponse = await fetch(
-      `https://${req.headers.host}/api/articles`
-    )
+    const articlesResponse = await fetch(`https://${req.headers.host}/api/articles`)
 
     if (!articlesResponse.ok) {
       throw new Error(`无法获取文章列表: ${articlesResponse.status}`)
@@ -71,9 +69,7 @@ export default async (req, res) => {
     // 2. 获取 Pinecone 索引
     console.log('[index] 步骤 2/4: 连接 Pinecone...')
     const pineconeClient = getPinecone()
-    const index = pineconeClient.index(
-      process.env.PINECONE_INDEX_NAME || 'luv-blog'
-    )
+    const index = pineconeClient.index(process.env.PINECONE_INDEX_NAME || 'luv-blog')
     console.log('[index] ✓ Pinecone 连接成功')
 
     let totalChunks = 0
@@ -108,19 +104,15 @@ export default async (req, res) => {
               'Content-Type': 'application/json',
             },
             timeout: 60000,
-          }
+          },
         )
 
         if (embeddingResponse.data.code !== '200') {
-          throw new Error(
-            `DashScope 错误: ${embeddingResponse.data.message}`
-          )
+          throw new Error(`DashScope 错误: ${embeddingResponse.data.message}`)
         }
 
         const vectors = embeddingResponse.data.output.embeddings
-        console.log(
-          `[index]   ✓ 向量生成成功 (${vectors.length} 个向量)`
-        )
+        console.log(`[index]   ✓ 向量生成成功 (${vectors.length} 个向量)`)
 
         // 准备 Pinecone 上传数据
         const upsertData = vectors.map((vec, idx) => ({
@@ -142,9 +134,7 @@ export default async (req, res) => {
         await index.upsert(upsertData)
         totalIndexed += upsertData.length
 
-        console.log(
-          `[index] ✓ ${article.title} 索引完成 (${upsertData.length} 块)`
-        )
+        console.log(`[index] ✓ ${article.title} 索引完成 (${upsertData.length} 块)`)
         indexingDetails.push({
           title: article.title,
           chunks: upsertData.length,

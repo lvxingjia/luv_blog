@@ -41,10 +41,7 @@
       <div v-for="result in searchResults" :key="result.id" class="result-card">
         <h4>{{ result.article_title }}</h4>
         <p class="result-text">{{ result.text.substring(0, 200) }}...</p>
-        <router-link
-          :to="`/post/${result.source_url.split('/').pop()}`"
-          class="read-more"
-        >
+        <router-link :to="`/post/${result.source_url.split('/').pop()}`" class="read-more">
           查看完整文章 →
         </router-link>
       </div>
@@ -64,8 +61,7 @@ const finished = ref(false)
 const error = ref('')
 
 // API 基础 URL（从环境变量读取，本地开发可设置为 http://localhost:3000）
-const API_BASE =
-  import.meta.env.VITE_API_BASE || 'https://你的vercel域名.vercel.app'
+const API_BASE = import.meta.env.VITE_API_BASE || 'https://你的vercel域名.vercel.app'
 
 const handleSearch = async () => {
   if (!query.value.trim()) {
@@ -82,7 +78,7 @@ const handleSearch = async () => {
 
   try {
     console.log('[RAGSearch] 发送查询:', query.value)
-    
+
     const response = await fetch(`${API_BASE}/api/rag/search`, {
       method: 'POST',
       headers: {
@@ -132,10 +128,7 @@ const handleSearch = async () => {
             } else if (data.content) {
               aiResponse.value += data.content
               displayedText.value = aiResponse.value
-              console.log(
-                '[RAGSearch] 收到内容块:',
-                data.content.substring(0, 20)
-              )
+              console.log('[RAGSearch] 收到内容块:', data.content.substring(0, 20))
             }
           } catch (e) {
             // 忽略 JSON 解析错误

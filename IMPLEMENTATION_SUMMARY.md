@@ -5,11 +5,13 @@
 ### 1. 后端云函数（Vercel）
 
 #### `/api/articles.js` - 获取文章列表
+
 - ✅ 已实现：从 GitHub Raw 获取 `src/data/articles.js`
 - ✅ 包含 CORS 设置和错误处理
 - ✅ 按日期自动排序
 
 #### `/api/rag/search.js` - RAG 搜索接口（核心！）
+
 - ✅ 已实现：DashScope Embedding 向量化
 - ✅ 已实现：Pinecone 向量搜索
 - ✅ 已实现：DashScope Chat 流式回答
@@ -17,6 +19,7 @@
 - 📝 需要配置环境变量
 
 #### `/api/rag/index-articles.js` - 文章索引化（定时任务）
+
 - ✅ 已实现：自动读取所有文章
 - ✅ 已实现：文本分块逻辑
 - ✅ 已实现：批量向量化（DashScope）
@@ -27,6 +30,7 @@
 ### 2. 前端组件
 
 #### `/src/components/RAGSearch.vue` - 搜索UI 组件
+
 - ✅ 已实现：搜索输入框
 - ✅ 已实现：流式响应显示（打字机效果）
 - ✅ 已实现：加载骨架屏
@@ -38,19 +42,23 @@
 ### 3. 配置文件
 
 #### `package.json` - 依赖更新
+
 - ✅ 已添加 `@pinecone-database/pinecone` ^2.0.0
 - ✅ 已添加 `axios` ^1.6.0
 
 #### `vercel.json` - Vercel 配置
+
 - ✅ 已创建：云函数内存配置（3008MB）
 - ✅ 已创建：最大执行时间（60秒）
 - ✅ 已创建：Node.js 运行时指定
 
 #### `.env.example` - 环境变量模板
+
 - ✅ 已创建：所有必要变量的说明
 - 📝 使用此文件创建 `.env.local`（本地开发）
 
 #### `RAG_DEPLOYMENT_GUIDE.md` - 完整部署指南
+
 - ✅ 已创建：详细的配置步骤
 - ✅ 已创建：故障排查指南
 - ✅ 已创建：测试方法
@@ -62,12 +70,14 @@
 ### 第 1 步：获取 API Keys（5 分钟）
 
 #### 1.1 阿里云 DashScope API Key
+
 1. 访问 https://dashscope.console.aliyun.com/
 2. 登录或注册（需要手机号验证）
 3. 在 API Key 页面复制你的 key（格式：`sk_xxxxx`）
 4. 保存为 `DASHSCOPE_API_KEY`
 
 #### 1.2 Pinecone API Key
+
 1. 访问 https://www.pinecone.io/
 2. 注册免费账户
 3. **创建索引**（重要！）：
@@ -118,6 +128,7 @@ curl -X POST \
 ```
 
 **成功响应示例**：
+
 ```json
 {
   "success": true,
@@ -138,7 +149,7 @@ curl -X POST \
 <template>
   <div>
     <!-- 你的其他内容 -->
-    
+
     <!-- 添加搜索组件 -->
     <RAGSearch />
   </div>
@@ -192,16 +203,16 @@ import RAGSearch from '@/components/RAGSearch.vue'
 
 ## ✨ 功能对比
 
-| 功能 | 状态 |
-|------|------|
-| **获取文章** | ✅ 完全实现 |
-| **文本向量化** | ✅ 完全实现 |
-| **向量搜索** | ✅ 完全实现 |
+| 功能                | 状态        |
+| ------------------- | ----------- |
+| **获取文章**        | ✅ 完全实现 |
+| **文本向量化**      | ✅ 完全实现 |
+| **向量搜索**        | ✅ 完全实现 |
 | **AI 回答（流式）** | ✅ 完全实现 |
-| **前端 UI** | ✅ 完全实现 |
-| **定时索引** | ✅ 完全实现 |
-| **错误处理** | ✅ 完全实现 |
-| **日志输出** | ✅ 完全实现 |
+| **前端 UI**         | ✅ 完全实现 |
+| **定时索引**        | ✅ 完全实现 |
+| **错误处理**        | ✅ 完全实现 |
+| **日志输出**        | ✅ 完全实现 |
 
 ---
 
@@ -224,7 +235,7 @@ import RAGSearch from '@/components/RAGSearch.vue'
 
 4. ✅ **完全工作流**
    ```
-   写文章 → Push GitHub 
+   写文章 → Push GitHub
            → 自动部署到 Vercel
            → 定时索引到 Pinecone
            → 用户搜索时实时查询
@@ -236,12 +247,14 @@ import RAGSearch from '@/components/RAGSearch.vue'
 ## 📞 快速参考
 
 ### 关键 URL
+
 - Vercel: https://vercel.com (部署查看)
 - DashScope: https://dashscope.console.aliyun.com/ (API Key)
 - Pinecone: https://www.pinecone.io/ (向量数据库)
 - Cron: https://cron-job.org/ (定时任务)
 
 ### 关键命令
+
 ```bash
 # 手动触发索引
 curl -X POST https://你的域名.vercel.app/api/rag/index-articles \
@@ -254,6 +267,7 @@ curl -X POST https://你的域名.vercel.app/api/rag/search \
 ```
 
 ### 环境变量速查
+
 ```env
 DASHSCOPE_API_KEY=          # 从阿里云复制
 DASHSCOPE_EMBEDDING_MODEL=text-embedding-v3
