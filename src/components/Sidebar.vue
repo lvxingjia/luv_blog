@@ -23,6 +23,29 @@
         </li>
       </ul>
     </div>
+
+    <!-- 文章分类（已注释）
+    <div class="nav-section">
+      <h3>文章分类</h3>
+      <div class="categories">
+        <span v-for="category in categories" :key="category" class="category-tag">
+          {{ category }}
+        </span>
+      </div>
+    </div>
+    -->
+
+    <!-- 最新动态（已注释）
+    <div class="nav-section">
+      <h3>最新动态</h3>
+      <div class="recent-updates">
+        <div v-for="update in recentUpdates" :key="update.id" class="update-item">
+          <span class="update-date">{{ update.date }}</span>
+          <p class="update-text">{{ update.text }}</p>
+        </div>
+      </div>
+    </div>
+    -->
   </nav>
 </template>
 
@@ -34,6 +57,15 @@ export default {
       type: Array,
       required: true,
     },
+    // categories 和 recentUpdates 暂时保留 prop 定义，以便将来快速启用
+    // categories: {
+    //   type: Array,
+    //   required: false,
+    // },
+    // recentUpdates: {
+    //   type: Array,
+    //   required: false,
+    // },
   },
 }
 </script>
@@ -43,10 +75,10 @@ export default {
 .sidebar {
   width: 280px;
   background: linear-gradient(135deg, #f9fafb, #f3f4f6);
-  padding: 24px 20px;
+  padding: 16px 16px;
   border-radius: 16px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-  backdrop-filter: blur(10px); /* 可选：毛玻璃效果（需父容器透明背景） */
+  backdrop-filter: blur(10px);
   overflow-y: auto;
   font-family:
     'Inter',
@@ -56,12 +88,12 @@ export default {
 }
 
 .nav-section {
-  margin-bottom: 32px;
+  margin-bottom: 16px;
 }
 
 .nav-section h3 {
-  margin: 0 0 16px;
-  font-size: 16px;
+  margin: 0 0 12px;
+  font-size: 14px;
   font-weight: 600;
   color: #4b5563;
   letter-spacing: 0.3px;
@@ -75,14 +107,14 @@ export default {
 }
 
 .nav-item {
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .nav-link {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 14px;
+  padding: 8px 12px;
   text-decoration: none;
   color: #4b5563;
   border-radius: 12px;
@@ -97,7 +129,7 @@ export default {
   transform: translateX(4px);
 }
 
-/* 激活状态：使用更柔和的主色调 */
+/* 激活状态 */
 :deep(.nav-link.active) {
   background: linear-gradient(to right, #4f46e5, #6366f1);
   color: white !important;
@@ -105,7 +137,7 @@ export default {
   transform: translateX(4px);
 }
 
-/* 图标微调（假设你用的是 Font Awesome 或类似） */
+/* 图标微调 */
 .nav-link i {
   font-size: 16px;
   width: 18px;
@@ -118,9 +150,9 @@ export default {
   opacity: 1;
 }
 
-/* 分类标签 */
+/* 分类标签（已隐藏） */
 .categories {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   gap: 8px;
 }
@@ -143,7 +175,11 @@ export default {
   border-color: #bfdbfe;
 }
 
-/* 最新动态 */
+/* 最新动态（已隐藏） */
+.recent-updates {
+  display: none;
+}
+
 .recent-updates .update-item {
   padding: 10px 0;
   border-bottom: 1px solid #edf2f7;
@@ -152,20 +188,24 @@ export default {
 
 .recent-updates .update-item:last-child {
   border-bottom: none;
-  padding-bottom: 0;
 }
 
 .update-date {
-  font-size: 12px;
-  color: #94a3b8;
   display: block;
+  font-size: 12px;
+  color: #a0aec0;
   margin-bottom: 4px;
+  font-weight: 600;
 }
 
 .update-text {
   margin: 0;
-  font-size: 14px;
-  color: #334155;
+  font-size: 13px;
+  color: #4b5563;
   line-height: 1.4;
+}
+
+.update-item:hover .update-text {
+  color: #4f46e5;
 }
 </style>
