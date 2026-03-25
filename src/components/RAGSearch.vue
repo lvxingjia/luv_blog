@@ -61,7 +61,7 @@ const finished = ref(false)
 const error = ref('')
 
 // API 基础 URL（从环境变量读取，本地开发可设置为 http://localhost:3000）
-const API_BASE = import.meta.env.VITE_API_BASE || 'https://你的vercel域名.vercel.app'
+const API_BASE = import.meta.env.VITE_API_BASE || 'https://luv-blog.vercel.app'
 
 const handleSearch = async () => {
   if (!query.value.trim()) {

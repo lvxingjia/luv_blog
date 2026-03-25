@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import RAGSearch from './components/RAGSearch.vue'
 import Sidebar from './components/Sidebar.vue'
 import ProfileSidebar from './components/ProfileSidebar.vue'
 import HeroHeader from './components/HeroHeader.vue'
@@ -42,6 +43,7 @@ export default {
     Sidebar, // 注册 Sidebar 组件
     ProfileSidebar, // 注册 ProfileSidebar 组件
     HeroHeader, // 注册 HeroHeader 组件
+    RAGSearch, // 注册 RAGSearch 组件
   },
   computed: {
     isHomePage() {
