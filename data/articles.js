@@ -7,7 +7,7 @@ import article001 from './articles/001-winter-warmth.js'
 import article002 from './articles/002-kyoto-walk.js'
 import article003 from './articles/003-reading-to-live.js'
 import article004 from './articles/004-night-photography-tips.js'
-import article005 from './articles/005-yuan-laarticlei-ni-ye-wan.js'
+import article005 from './articles/005-yuan-lai-ni-ye-wan.js'
 import article006 from './articles/006-web-deploy.js'
 import article007 from './articles/007-rag-deveop.js'
 
