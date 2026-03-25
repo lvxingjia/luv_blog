@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { articles } from '../../data/articles.js'
+import { articles } from '../../data/articles'
 
 export default {
   name: 'Archive',

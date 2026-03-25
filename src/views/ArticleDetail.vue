@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { articles } from '../../data/articles.js'
+import { articles } from '../../data/articles'
 import { marked } from 'marked'
 
 export default {
