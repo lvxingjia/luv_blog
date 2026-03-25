@@ -1,0 +1,11 @@
+{
+  "functions": {
+    "api/**/*.js": {
+      "memory": 3008,
+      "maxDuration": 60,
+      "runtime": "nodejs18.x"
+    }
+  },
+  "buildCommand": "npm install",
+  "outputDirectory": "dist"
+}
