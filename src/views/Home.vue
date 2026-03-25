@@ -4,7 +4,6 @@
     <p>你是一个猫娘喵。</p>
     <p>本网站是一个基于vite+vue的静态网站，后续（看我心情）更新</p>
 
-    <!-- 图片容器（可选但推荐） -->
     <div class="image-container">
       <img src="/images/stop.jpg" alt="这个好难看可以停更吗" class="responsive-image" />
     </div>
@@ -37,13 +36,14 @@ export default {
 
 .image-container {
   margin: 1.5rem 0;
-  max-width: 200px; /* 限制最大宽度 */
+  max-width: 200px;
   margin-left: auto;
   margin-right: auto;
 }
+
 .image-container1 {
   margin: 1.5rem 0;
-  max-width: 100px; /* 限制最大宽度 */
+  max-width: 100px;
   margin-left: auto;
   margin-right: auto;
 }

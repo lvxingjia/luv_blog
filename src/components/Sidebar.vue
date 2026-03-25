@@ -23,26 +23,6 @@
         </li>
       </ul>
     </div>
-
-    <!-- 其他部分保持不变 -->
-    <div class="nav-section">
-      <h3>文章分类</h3>
-      <div class="categories">
-        <span v-for="category in categories" :key="category" class="category-tag">
-          {{ category }}
-        </span>
-      </div>
-    </div>
-
-    <div class="nav-section">
-      <h3>最新动态</h3>
-      <div class="recent-updates">
-        <div v-for="update in recentUpdates" :key="update.id" class="update-item">
-          <span class="update-date">{{ update.date }}</span>
-          <p class="update-text">{{ update.text }}</p>
-        </div>
-      </div>
-    </div>
   </nav>
 </template>
 
@@ -51,14 +31,6 @@ export default {
   name: 'Sidebar',
   props: {
     navItems: {
-      type: Array,
-      required: true,
-    },
-    categories: {
-      type: Array,
-      required: true,
-    },
-    recentUpdates: {
       type: Array,
       required: true,
     },

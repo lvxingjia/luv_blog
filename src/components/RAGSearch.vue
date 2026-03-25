@@ -60,8 +60,20 @@ const displayedText = ref('')
 const finished = ref(false)
 const error = ref('')
 
-// API 基础 URL（从环境变量读取，本地开发可设置为 http://localhost:3000）
-const API_BASE = import.meta.env.VITE_API_BASE || 'https://luv-blog.vercel.app'
+// API 基础 URL
+// 优先级: 环境变量 > 当前域名 > 默认本地
+const getAPIBase = () => {
+  if (import.meta.env.VITE_API_BASE) {
+    return import.meta.env.VITE_API_BASE
+  }
+  // 在浏览器中，使用当前站点域名
+  if (typeof window !== 'undefined') {
+    return window.location.origin
+  }
+  return 'http://localhost:3000'
+}
+
+const API_BASE = getAPIBase()
 
 const handleSearch = async () => {
   if (!query.value.trim()) {

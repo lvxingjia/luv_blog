@@ -6,7 +6,8 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/luv_blog/',
+  // GitHub Pages 使用 base，Vercel 不需要
+  base: process.env.GITHUB_PAGES ? '/luv_blog/' : '/',
   plugins: [
     vue(),
     vueDevTools(),

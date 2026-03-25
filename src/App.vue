@@ -10,7 +10,11 @@
 
     <div class="main-container">
       <!-- 左侧导航栏 -->
-      <Sidebar :nav-items="navItems" :categories="categories" :recent-updates="recentUpdates" />
+      <aside class="left-sidebar">
+        <Sidebar :nav-items="navItems" />
+        <!-- RAG 搜索组件放在 Sidebar 下方 -->
+        <RAGSearch />
+      </aside>
 
       <!-- 中间主要内容 -->
       <main class="content">
@@ -19,7 +23,9 @@
       </main>
 
       <!-- 右侧个人信息 -->
-      <ProfileSidebar :profile="profile" :tags="tags" />
+      <aside class="right-sidebar">
+        <ProfileSidebar :profile="profile" :tags="tags" />
+      </aside>
     </div>
 
     <!-- 页脚 -->
@@ -140,6 +146,16 @@ body {
   overflow: hidden; /* 防止外层滚动 */
 }
 
+/* 左侧 Sidebar 和 RAG 搜索容器 */
+.left-sidebar {
+  width: 300px;
+  overflow-y: auto;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .content {
   flex: 1;
   background-color: #fff;
@@ -147,6 +163,13 @@ body {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   overflow-y: auto; /* 主内容区可滚动 */
+}
+
+/* 右侧个人信息容器 */
+.right-sidebar {
+  width: 300px;
+  overflow-y: auto;
+  flex-shrink: 0;
 }
 
 /* 页脚 */
@@ -164,11 +187,27 @@ body {
     flex-direction: column;
     align-items: center;
   }
+  
+  .left-sidebar {
+    width: 100%;
+  }
+  
+  .right-sidebar {
+    width: 100%;
+  }
 }
 
 @media (max-width: 768px) {
   .main-container {
     padding: 0 1rem;
+  }
+  
+  .left-sidebar {
+    width: 100%;
+  }
+  
+  .right-sidebar {
+    width: 100%;
   }
 }
 </style>
