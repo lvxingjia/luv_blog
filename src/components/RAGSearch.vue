@@ -1,5 +1,10 @@
 <template>
   <div class="rag-search-container">
+    <!-- 环境检测提示 -->
+    <div v-if="isGitHubPages" class="info-banner">
+      <span>ℹ️ RAG 搜索功能仅在 Vercel 部署上可用。访问 GitHub Pages 版本查看文章列表。</span>
+    </div>
+
     <!-- 搜索框 -->
     <div class="search-box">
       <input
@@ -7,10 +12,10 @@
         @keyup.enter="handleSearch"
         type="text"
         placeholder="问我关于文章的任何问题..."
-        :disabled="loading"
+        :disabled="loading || isGitHubPages"
         class="search-input"
       />
-      <button @click="handleSearch" :disabled="loading" class="search-button">
+      <button @click="handleSearch" :disabled="loading || isGitHubPages" class="search-button">
         {{ loading ? '思考中...' : '搜索' }}
       </button>
     </div>
@@ -50,7 +55,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
 const query = ref('')
 const loading = ref(false)
@@ -59,6 +64,14 @@ const searchResults = ref([])
 const displayedText = ref('')
 const finished = ref(false)
 const error = ref('')
+const isGitHubPages = ref(false)
+
+// 检测是否在 GitHub Pages 上
+onMounted(() => {
+  if (typeof window !== 'undefined') {
+    isGitHubPages.value = window.location.hostname === 'lvxingjia.github.io'
+  }
+})
 
 // API 基础 URL
 // 优先级: 环境变量 > 当前域名 > 默认本地
@@ -76,6 +89,11 @@ const getAPIBase = () => {
 const API_BASE = getAPIBase()
 
 const handleSearch = async () => {
+  if (isGitHubPages.value) {
+    error.value = 'RAG 搜索仅在 Vercel 部署上可用。请访问 Vercel 部署版本。'
+    return
+  }
+
   if (!query.value.trim()) {
     error.value = '请输入查询问题'
     return
@@ -215,6 +233,19 @@ const handleSearch = async () => {
 .search-button:disabled {
   background: #9ca3af;
   cursor: not-allowed;
+}
+
+.info-banner {
+  background: #dbeafe;
+  color: #075985;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  border-left: 4px solid #0284c7;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  line-height: 1.4;
 }
 
 .error-message {
