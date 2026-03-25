@@ -8,7 +8,7 @@
     :style="{ height: currentHeight + 'px' }"
   >
     <!-- 背景图始终渲染 -->
-    <div class="hero-bg" style="background-image: url('/luv_blog/images/header_bg.jpg')"></div>
+    <div class="hero-bg" :style="{ backgroundImage: `url(${heroBgImage})` }"></div>
 
     <!-- 遮罩层：根据状态调整透明度 -->
     <div class="hero-overlay" :class="{ 'hero-overlay--shrunk': !showHero && props.isHero }"></div>
@@ -33,7 +33,19 @@ const props = defineProps({
   isHero: Boolean,
   heroTitle: String,
   heroSubtitle: String,
-  // heroBg: String, // 不再需要传入背景图路径
+})
+
+// 根据当前 URL 情况动态获取 base path
+const getBasePath = () => {
+  if (typeof window !== 'undefined') {
+    return window.location.pathname.includes('/luv_blog') ? '/luv_blog' : ''
+  }
+  return ''
+}
+
+const heroBgImage = computed(() => {
+  const basePath = getBasePath()
+  return `${basePath}/images/header_bg.jpg`
 })
 
 const scrollY = ref(0)
