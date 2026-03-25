@@ -5,6 +5,6 @@
       "maxDuration": 60
     }
   },
-  "buildCommand": "npm install",
+  "buildCommand": "npm run build",
   "outputDirectory": "dist"
 }
