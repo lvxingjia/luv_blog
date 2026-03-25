@@ -3,7 +3,7 @@
     "api/**/*.js": {
       "memory": 1024,
       "maxDuration": 60,
-      "runtime": "nodejs@18"
+      "runtime": "nodejs@18.17.0"
     }
   },
   "buildCommand": "npm install",
